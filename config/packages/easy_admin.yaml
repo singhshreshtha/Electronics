@@ -1,0 +1,29 @@
+easy_admin:
+  design:
+    menu:
+      - { label: "Entities" }
+      - label: "Products"
+        children:
+          - { entity: Product, label: "Product List", icon: "th-list" }
+      - label: "Category"
+        children:
+          - { entity: Category, label: "Electronic List", icon: "th-list" }
+      - {label: "Settings"}
+      - label: "User"
+        children:
+          - { entity: User, label: "User List", icon: "user", permission: 'ROLE_ADMIN' }
+  site_name: 'Electronics Data'
+  user:
+    display_name: true
+    name_property_path: 'name'
+  entities:
+    # List the entity class name you want to manage
+    Product:
+      class: App\Entity\Product
+    Category:
+      class: App\Entity\Category
+    User:
+      class: App\Entity\User
+      list:
+        item_permission: 'ROLE_ADMIN'
+
