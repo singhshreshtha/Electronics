@@ -20,6 +20,34 @@ easy_admin:
     # List the entity class name you want to manage
     Product:
       class: App\Entity\Product
+      label: "Product"
+      form:
+        fields:
+          - { type: 'group', icon: 'pencil', label: 'Product Field', css_class: 'col-lg-6' }
+          - productName
+          - description
+          - status
+          - companyName
+          - { type: 'group', icon: 'pencil', label: 'Product Field', css_class: 'col-lg-6' }
+          - CreatedAt
+          - UpdatedAt
+          - category
+          - { property: 'thumbnailFile', type: 'vich_image' }
+      list:
+        collapse_actions: true
+        actions: [ 'show', 'edit', 'delete' ]
+        batch_actions: [ 'delete' ]
+        title: "Product"
+        fields: ['productName','description','CreatedAt','category', {property: 'thumbnail', type: 'image', base_path: '%uploads_path%'}]
+#        filters: [ 'status' ]
+      show:
+        fields:
+          - productName
+          - status
+          - CreatedAt
+          - category
+          - thumbnail
+          - { property: 'thumbnail', type: 'image', base_path: '%uploads_path%' }
     Category:
       class: App\Entity\Category
     User:

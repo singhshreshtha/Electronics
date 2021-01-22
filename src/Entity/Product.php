@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @Vich\Uploadable()
  */
 class Product
 {
@@ -52,6 +54,35 @@ class Product
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
+
+    /**
+     * @ORM\Column(type="string", length=200)
+     */
+    private $thumbnail;
+
+    /**
+     * @Vich\UploadableField(mapping="product_thumbnails", fileNameProperty="thumbnail")
+     */
+    private $thumbnailFile;
+
+    /**
+     * @return mixed
+     */
+    public function getThumbnailFile()
+    {
+        return $this->thumbnailFile;
+    }
+
+    /**
+     * @param mixed $thumbnailFile
+     */
+    public function setThumbnailFile($thumbnailFile): void
+    {
+        $this->thumbnailFile = $thumbnailFile;
+        if ($thumbnailFile) {
+            $this->UpdatedAt = new \DateTime();
+        }
+    }
 
     public function getId(): ?int
     {
@@ -138,6 +169,18 @@ class Product
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }
