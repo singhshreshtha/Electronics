@@ -294,4 +294,9 @@ class User implements UserInterface
 //        $this->updatedAt = new \DateTime();
 //    }
 
+//public function getIsVerified(): ?bool
+//{
+//    return $this->isVerified;
+//}
+
 }
